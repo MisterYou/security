@@ -17,16 +17,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.inMemoryAuthentication().withUser("forezp").password("123456").roles("USER");
-
-        auth.userDetailsService(userDetailsService());
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -49,5 +39,15 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 //		return manager;
 //	}
 
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.inMemoryAuthentication().withUser("forezp").password("123456").roles("USER");
+
+        auth.userDetailsService(userDetailsService);
+    }
 
 }
